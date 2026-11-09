@@ -1,0 +1,199 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Digital Product",
+      "description": "Store digital product such as E-Book (PDF), template, or UI design kit",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 200,
+          "description": "Title of the digital product"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["ebook", "template", "ui"],
+          "description": "Category key"
+        },
+        "categoryLabel": {
+          "type": "string",
+          "description": "Display label for category"
+        },
+        "badge": {
+          "type": "string",
+          "description": "Optional promotional badge"
+        },
+        "coverImage": {
+          "type": "string",
+          "description": "1:1 Cover image URL"
+        },
+        "priceLKR": {
+          "type": "number",
+          "description": "Price in Sri Lankan Rupees"
+        },
+        "priceUSD": {
+          "type": "number",
+          "description": "Equivalent price in USD"
+        },
+        "originalPriceLKR": {
+          "type": "number",
+          "description": "Original crossed-out price"
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Brief summary shown on card"
+        },
+        "fullDescription": {
+          "type": "string",
+          "description": "Complete description shown in details modal"
+        },
+        "format": {
+          "type": "string",
+          "description": "Format description (e.g. PDF Document)"
+        },
+        "pages": {
+          "type": "number",
+          "description": "Number of pages for books"
+        },
+        "fileSize": {
+          "type": "string",
+          "description": "File download size"
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of the product"
+        },
+        "author": {
+          "type": "string",
+          "description": "Author or creator name"
+        },
+        "highlights": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Bullet points of key features"
+        },
+        "deliveryMethod": {
+          "type": "string",
+          "description": "Delivery explanation"
+        },
+        "inStock": {
+          "type": "boolean",
+          "description": "Availability flag"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["title", "category", "priceLKR", "priceUSD", "coverImage"]
+    },
+    "ContactMessage": {
+      "title": "Contact Message",
+      "description": "Client contact and project consultation requests submitted through the website",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Name of the sender"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of the sender"
+        },
+        "service": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Requested web development or design service"
+        },
+        "budget": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Budget range for the project"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 3000,
+          "description": "Client message or inquiry details"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when message was created"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["new", "read", "replied", "archived"],
+          "description": "Current processing status"
+        }
+      },
+      "required": ["name", "email", "message", "createdAt", "status"]
+    },
+    "OrderInquiry": {
+      "title": "Order Inquiry",
+      "description": "Digital product order request or WhatsApp checkout record",
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "ID of the digital product"
+        },
+        "productTitle": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Title of the digital product"
+        },
+        "productPrice": {
+          "type": "number",
+          "description": "Price in LKR"
+        },
+        "customerName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Customer name if provided"
+        },
+        "customerPhone": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Customer contact number"
+        },
+        "customerEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Customer email"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when order was submitted"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "paid", "delivered", "cancelled"],
+          "description": "Status of the digital order"
+        }
+      },
+      "required": ["productId", "productTitle", "productPrice", "createdAt", "status"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Digital store catalog with E-Books, templates, and UI design kits"
+    },
+    "/contact_messages/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Client messages and project consultation requests submitted through the website"
+    },
+    "/orders/{orderId}": {
+      "schema": "OrderInquiry",
+      "description": "Digital store product order inquiries and receipt confirmations"
+    }
+  }
+}

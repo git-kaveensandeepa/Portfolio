@@ -1,26 +1,36 @@
-import { useState } from 'react';
-import { AnimatePresence } from 'motion/react';
+import { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
 import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
-import { Services } from './components/Services';
 import { Process } from './components/Process';
-import { Pricing } from './components/Pricing';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
-import { SplashScreen } from './components/SplashScreen';
+import { CustomCursor } from './components/CustomCursor';
+import { BackgroundEffects } from './components/BackgroundEffects';
+import { AdminPage } from './pages/AdminPage';
+import { ChatbotWidget } from './components/ChatbotWidget';
 
-export default function App() {
-  const [showSplash, setShowSplash] = useState(true);
+function ScrollHandler() {
+  const { pathname } = useLocation();
 
+  useEffect(() => {
+    // Always start at top of page (0,0) on initial load or path change
+    window.scrollTo(0, 0);
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }, [pathname]);
+
+  return null;
+}
+
+function PortfolioHome() {
   return (
-    <div className="min-h-screen bg-mesh relative">
-      <AnimatePresence>
-        {showSplash && <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />}
-      </AnimatePresence>
-
+    <div className="relative z-10">
       <Navbar />
       
       <main>
@@ -28,9 +38,7 @@ export default function App() {
         <About />
         <Skills />
         <Projects />
-        <Services />
         <Process />
-        <Pricing />
         <Contact />
       </main>
 
@@ -39,3 +47,35 @@ export default function App() {
   );
 }
 
+export default function App() {
+  return (
+    <>
+      <ScrollHandler />
+      <div className="min-h-screen bg-mesh relative selection:bg-blue-500/20 selection:text-blue-900 dark:selection:text-white">
+        <BackgroundEffects />
+        <CustomCursor />
+        <ChatbotWidget />
+        
+        <Helmet>
+          <title>Kaveen Sandeepa | Web Developer, Designer & Digital Creator</title>
+          <meta
+            name="description"
+            content="Portfolio of Kaveen Sandeepa. Web development, UI design, custom web applications, and mobile apps."
+          />
+          <link rel="canonical" href="https://kaveensandeepa.lk" />
+          <meta property="og:title" content="Kaveen Sandeepa | Web Developer & Designer" />
+          <meta property="og:description" content="Portfolio of Kaveen Sandeepa, specializing in designing and developing premium websites that help businesses grow." />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://kaveensandeepa.lk" />
+          <meta property="og:image" content="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200" />
+        </Helmet>
+
+        <Routes>
+          <Route path="/" element={<PortfolioHome />} />
+          <Route path="/kajja" element={<AdminPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
+    </>
+  );
+}

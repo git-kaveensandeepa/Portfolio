@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   html {
@@ -6,66 +7,210 @@
   }
 }
 
+/* Glassmorphic Modern Premium SaaS Design Tokens */
+.saas-glass {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.saas-card {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+}
+
+.saas-card-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.saas-card-hover:hover {
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 12px 40px -10px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-@layer utilities {
-  .glass {
-    @apply bg-white/30 backdrop-blur-lg border border-white/40 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.1)];
-  }
-  
-  .glass-card {
-    @apply bg-white/40 backdrop-blur-xl border border-white/50 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.12)] hover:bg-white/50 hover:border-white/60 transition-all duration-500;
-  }
-
-  .glass-btn {
-    @apply bg-white/40 backdrop-blur-md border border-white/60 shadow-sm hover:bg-white/60 hover:shadow-md transition-all duration-300 text-slate-900;
-  }
-  
-  .glass-btn-primary {
-    @apply bg-slate-900/70 backdrop-blur-md border border-slate-700/50 shadow-md hover:bg-slate-900/80 hover:shadow-lg transition-all duration-300 text-white;
-  }
-
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500;
-  }
+/* Custom Neumorphic Design Tokens */
+:root {
+  --neu-bg: #e9eef6;
+  --neu-light: #ffffff;
+  --neu-dark: #c2cfdf;
+  --neu-dark-deep: #a8b8cc;
+  --neu-text: #1e293b;
+  --neu-text-muted: #64748b;
 }
 
-html {
-  scroll-behavior: smooth;
+.dark {
+  --neu-bg: #131722;
+  --neu-light: rgba(255, 255, 255, 0.05);
+  --neu-dark: rgba(0, 0, 0, 0.65);
+  --neu-dark-deep: rgba(0, 0, 0, 0.85);
+  --neu-text: #f8fafc;
+  --neu-text-muted: #94a3b8;
+}
+
+/* Neumorphic Flat / Extruded Surfaces */
+.neu-card {
+  background-color: var(--neu-bg);
+  box-shadow: 10px 10px 22px var(--neu-dark), -10px -10px 22px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dark .neu-card {
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.neu-card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.neu-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 14px 14px 28px var(--neu-dark-deep), -14px -14px 28px var(--neu-light);
+}
+
+/* Neumorphic Inset / Sunken Wells */
+.neu-inset {
+  background-color: var(--neu-bg);
+  box-shadow: inset 5px 5px 10px var(--neu-dark), inset -5px -5px 10px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+.dark .neu-inset {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* Neumorphic Buttons */
+.neu-btn {
+  background-color: var(--neu-bg);
+  color: var(--neu-text);
+  box-shadow: 6px 6px 14px var(--neu-dark), -6px -6px 14px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.neu-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 8px 8px 18px var(--neu-dark-deep), -8px -8px 18px var(--neu-light);
+}
+.neu-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 4px 4px 8px var(--neu-dark), inset -4px -4px 8px var(--neu-light);
+}
+
+.neu-btn-primary {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: #ffffff;
+  box-shadow: 6px 6px 16px var(--neu-dark), -6px -6px 16px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.neu-btn-primary:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #283548, #131d2e);
+  box-shadow: 8px 8px 20px var(--neu-dark-deep), -8px -8px 20px var(--neu-light);
+}
+.neu-btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.neu-btn-fiverr {
+  background-color: var(--neu-bg);
+  color: #10b981;
+  border: 1.5px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 6px 6px 14px var(--neu-dark), -6px -6px 14px var(--neu-light);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.neu-btn-fiverr:hover {
+  transform: translateY(-1px);
+  background-color: rgba(16, 185, 129, 0.08);
+  border-color: #10b981;
+  box-shadow: 8px 8px 18px var(--neu-dark-deep), -8px -8px 18px var(--neu-light);
+}
+.neu-btn-fiverr:active {
+  transform: translateY(1px);
+  box-shadow: inset 3px 3px 6px var(--neu-dark), inset -3px -3px 6px var(--neu-light);
+}
+
+/* Circular tactile buttons */
+.neu-circle-btn {
+  background-color: var(--neu-bg);
+  box-shadow: 5px 5px 12px var(--neu-dark), -5px -5px 12px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.neu-circle-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 7px 7px 15px var(--neu-dark-deep), -7px -7px 15px var(--neu-light);
+}
+.neu-circle-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 3px 3px 7px var(--neu-dark), inset -3px -3px 7px var(--neu-light);
+}
+
+/* Neumorphic badge / pill */
+.neu-badge {
+  background-color: var(--neu-bg);
+  box-shadow: 3px 3px 8px var(--neu-dark), -3px -3px 8px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Floating Neumorphic Nav Island */
+.neu-nav-bar {
+  background-color: rgba(233, 238, 246, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 8px 8px 20px var(--neu-dark), -8px -8px 20px var(--neu-light);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.dark .neu-nav-bar {
+  background-color: rgba(19, 23, 34, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Smooth custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--neu-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  border: 2px solid var(--neu-bg);
+  box-shadow: inset 2px 2px 4px var(--neu-dark), inset -2px -2px 4px var(--neu-light);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: var(--neu-bg);
+  color: var(--neu-text);
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Subtle animated background */
-@keyframes smoothDrift {
-  0% { background-position: 0% 0%; }
-  25% { background-position: 100% 0%; }
-  50% { background-position: 100% 100%; }
-  75% { background-position: 0% 100%; }
-  100% { background-position: 0% 0%; }
-}
-
+/* Background lighting mesh */
 .bg-mesh {
-  background-color: #0a0a0a;
+  background-color: var(--neu-bg);
   background-image: 
-    radial-gradient(circle at 15% 50%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(circle at 85% 30%, hsla(225,39%,10%,1) 0, transparent 50%), 
-    radial-gradient(circle at 50% 80%, hsla(339,15%,10%,1) 0, transparent 50%);
-  background-size: 150% 150%;
-  animation: smoothDrift 25s ease-in-out infinite alternate;
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.7) 0%, transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(194, 207, 223, 0.5) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.45) 0%, transparent 60%);
+  background-attachment: fixed;
 }
 
-.light .bg-mesh {
-  background-color: #f1f5f9;
+.dark .bg-mesh {
+  background-color: var(--neu-bg);
   background-image: 
-    radial-gradient(circle at 15% 50%, hsla(260, 80%, 88%, 1) 0, transparent 50%), 
-    radial-gradient(circle at 85% 30%, hsla(200, 90%, 85%, 1) 0, transparent 50%), 
-    radial-gradient(circle at 50% 80%, hsla(340, 80%, 88%, 1) 0, transparent 50%);
-  background-size: 150% 150%;
-  animation: smoothDrift 25s ease-in-out infinite alternate;
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 88% 82%, rgba(0, 0, 0, 0.45) 0%, transparent 50%);
+  background-attachment: fixed;
 }

@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Digital Products Catalogue (Public read, Admin write)
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // Portfolio Projects (Public read, Admin write)
+    match /portfolio_projects/{projectId} {
+      allow read: if true;
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // Contact messages submitted via website
+    match /contact_messages/{messageId} {
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() >= 2
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() <= 150
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() >= 5
+                    && request.resource.data.message.size() <= 3000
+                    && request.resource.data.status in ['new', 'read', 'replied', 'archived']
+                    && request.resource.data.createdAt is string;
+
+      allow read, update, delete: if isAuthenticated();
+    }
+
+    // Orders submitted via Digital Store
+    match /orders/{orderId} {
+      allow create: if request.resource.data.productId is string
+                    && request.resource.data.productTitle is string
+                    && request.resource.data.productPrice is number
+                    && request.resource.data.productPrice >= 0
+                    && request.resource.data.status in ['pending', 'paid', 'delivered', 'cancelled']
+                    && request.resource.data.createdAt is string;
+
+      allow read, update, delete: if isAuthenticated();
+    }
+
+    // Deny all other access by default (Zero-Trust)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

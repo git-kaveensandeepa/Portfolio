@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SectionHeading } from './SectionHeading';
 import { ProjectCard } from './ProjectCard';
 import { ProjectModal } from './ProjectModal';
-import { projects, Project } from '../lib/data';
+import { projects as initialProjects, Project } from '../lib/data';
+import { subscribeToPortfolioProjects } from '../lib/projectsService';
 
 export function Projects() {
+  const [projectList, setProjectList] = useState<Project[]>(initialProjects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = subscribeToPortfolioProjects((list) => {
+      setProjectList(list);
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <section id="projects" className="py-24 relative">
@@ -15,9 +24,9 @@ export function Projects() {
           subtitle="A collection of recent work focusing on clean design and modern web technologies." 
         />
         
-        {projects.length > 0 ? (
+        {projectList.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-            {projects.map((project, index) => (
+            {projectList.map((project, index) => (
               <ProjectCard 
                 key={project.id} 
                 project={project} 

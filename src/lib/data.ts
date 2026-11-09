@@ -23,7 +23,7 @@ export const projects: Project[] = [
       "Progressive Web App (PWA) for native app-like experience",
       "Comprehensive Admin Dashboard for complete control"
     ],
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&q=80&w=1200",
+    image: "https://i.ibb.co/SD8mjBNj/http-My-Feed-LK-web-app.png",
     tech: ["Angular", "Tailwind CSS", "Firebase", "Node.js", "Gemini AI API", "SSR"],
     url: "https://myfeedlk.com"
   }
@@ -31,42 +31,76 @@ export const projects: Project[] = [
 
 export const skills = {
   frontend: [
-    { name: "HTML", level: 90 },
-    { name: "CSS", level: 90 },
-    { name: "JavaScript", level: 85 },
-    { name: "React", level: 85 },
-    { name: "Tailwind CSS", level: 95 }
+    { name: "React & Next.js", level: 90 },
+    { name: "Angular", level: 85 },
+    { name: "JavaScript / TypeScript", level: 90 },
+    { name: "Tailwind CSS", level: 95 },
+    { name: "HTML & CSS", level: 95 }
+  ],
+  backend: [
+    { name: "Node.js", level: 90 },
+    { name: "Express.js", level: 85 },
+    { name: "REST APIs & JSON", level: 90 },
+    { name: "Firebase & Firestore", level: 85 }
   ],
   design: [
-    { name: "UI Design", level: 80 },
-    { name: "Responsive Design", level: 95 },
-    { name: "Glassmorphism", level: 90 },
-    { name: "UX Thinking", level: 85 }
+    { name: "UI Design & Systems", level: 85 },
+    { name: "Responsive Mobile-First", level: 95 },
+    { name: "Glassmorphism & Neumorphism", level: 90 },
+    { name: "UX Wireframing", level: 85 }
   ],
   tools: [
-    { name: "Vite", level: 85 },
-    { name: "Git", level: 80 },
-    { name: "Canva", level: 75 },
-    { name: "Google AI Studio", level: 80 }
+    { name: "Vite & Webpack", level: 85 },
+    { name: "Git & GitHub", level: 85 },
+    { name: "Google AI Studio", level: 85 }
+  ]
+};
+
+export const websitePackage = {
+  title: "Complete Website Development Package",
+  description: "A complete, high-performance website package tailored for Sri Lankan and global businesses with premium UI/UX, animations, and dedicated support.",
+  sampleFirstMonthTotal: "රු. 68,400",
+  sampleFirstMonthUsd: "approx. $225",
+  inclusions: [
+    "Up to 8 Pages (Pages 8ක් දක්වා)",
+    "Custom branded UI/UX Design",
+    "Advanced animations & visual sections",
+    "Portfolio, Services & Photo Gallery",
+    "Contact form & Lead-capture setup",
+    "Basic SEO & Analytics setup",
+    "Performance & Speed Optimization",
+    "45 Days Bug-Fix Support (දින 45ක bug-fix support)"
+  ],
+  separateServices: [
+    { name: "Hosting", cost: "රු. 3,500 / මාසය" },
+    { name: "Domain (.lk example)", cost: "රු. 5,000 / වසර" }
   ]
 };
 
 export const services = [
   {
-    title: "Business Websites",
-    description: "Modern responsive websites tailored for small and medium businesses to establish a strong online presence."
+    title: "Website Development",
+    description: "Up to 8 custom pages, branded UI/UX, animations, portfolio, contact forms, basic SEO, and 45 days support.",
+    popular: true,
+    price: "රු. 68,400 (First Month Total)"
   },
   {
-    title: "Landing Pages",
-    description: "High-converting, performance-optimized landing pages designed for products, services, and marketing campaigns."
+    title: "Android App Development",
+    description: "Native Kotlin & Jetpack Compose mobile applications built with modern architecture and offline storage.",
+    popular: false,
+    price: "Custom Quote"
   },
   {
-    title: "SaaS Interfaces",
-    description: "Clean, intuitive, and modern dashboard designs and web application interfaces for software products."
+    title: "Landing Pages & Stores",
+    description: "High-converting single-page landing pages and digital e-book / product store platforms.",
+    popular: false,
+    price: "From රු. 30,000"
   },
   {
-    title: "UI Development",
-    description: "Pixel-perfect, clean, and responsive frontend implementation bringing designs to life with smooth interactions."
+    title: "Custom Web Applications",
+    description: "Tailored SaaS platforms, admin dashboards, AI integration engines, and complex client portals.",
+    popular: false,
+    price: "Custom Scope"
   }
 ];
 
