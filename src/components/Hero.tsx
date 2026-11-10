@@ -82,8 +82,12 @@ export function Hero() {
                 <img 
                   src="https://i.postimg.cc/D0Sr0P4r/FB-IMG-1788866980888.jpg" 
                   alt="Kaveen Sandeepa" 
+                  width={380}
+                  height={380}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
                   loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
               </div>

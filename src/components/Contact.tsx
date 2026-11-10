@@ -14,8 +14,7 @@ import {
   ShieldCheck,
   RotateCcw
 } from 'lucide-react';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+
 
 const SERVICES = [
   'Business Website',
@@ -68,6 +67,8 @@ export function Contact() {
     setLoading(true);
 
     try {
+      const { collection, addDoc } = await import('firebase/firestore');
+      const { db } = await import('../lib/firebase');
       await addDoc(collection(db, 'contact_messages'), {
         name: formData.name.trim(),
         email: formData.email.trim(),
@@ -92,6 +93,8 @@ export function Contact() {
     // If user filled in some details, save them to Firestore as well
     if (formData.name.trim() || formData.message.trim()) {
       try {
+        const { collection, addDoc } = await import('firebase/firestore');
+        const { db } = await import('../lib/firebase');
         addDoc(collection(db, 'contact_messages'), {
           name: formData.name.trim() || 'WhatsApp Visitor',
           email: formData.email.trim() || 'via-whatsapp@client.com',

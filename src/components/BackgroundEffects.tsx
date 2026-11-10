@@ -26,7 +26,9 @@ export function BackgroundEffects() {
   const [particles, setParticles] = useState<{id: number, x: number, y: number, size: number, duration: number, delay: number}[]>([]);
   
   useEffect(() => {
-    const newParticles = Array.from({ length: 15 }).map((_, i) => ({
+    const isMobile = window.matchMedia('(pointer: coarse)').matches;
+    const count = isMobile ? 5 : 15;
+    const newParticles = Array.from({ length: count }).map((_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,

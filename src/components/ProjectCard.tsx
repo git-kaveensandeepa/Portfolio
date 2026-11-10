@@ -35,8 +35,11 @@ export function ProjectCard({ project, index, onClick }: ProjectCardProps) {
               <img
                 src={project.image}
                 alt={`Preview of ${project.title}`}
+                width={600}
+                height={375}
                 className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-black/5 dark:bg-black/20 transition-opacity duration-300 group-hover:opacity-0" />
             </div>

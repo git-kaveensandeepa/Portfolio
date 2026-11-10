@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Navbar } from './components/Navbar';
@@ -11,8 +11,9 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { CustomCursor } from './components/CustomCursor';
 import { BackgroundEffects } from './components/BackgroundEffects';
-import { AdminPage } from './pages/AdminPage';
-import { ChatbotWidget } from './components/ChatbotWidget';
+
+const AdminPage = lazy(() => import('./pages/AdminPage').then((m) => ({ default: m.AdminPage })));
+const ChatbotWidget = lazy(() => import('./components/ChatbotWidget').then((m) => ({ default: m.ChatbotWidget })));
 
 function ScrollHandler() {
   const { pathname } = useLocation();
@@ -54,7 +55,9 @@ export default function App() {
       <div className="min-h-screen bg-mesh relative selection:bg-blue-500/20 selection:text-blue-900 dark:selection:text-white">
         <BackgroundEffects />
         <CustomCursor />
-        <ChatbotWidget />
+        <Suspense fallback={null}>
+          <ChatbotWidget />
+        </Suspense>
         
         <Helmet>
           <title>Kaveen Sandeepa | Web Developer, Designer & Digital Creator</title>
@@ -70,11 +73,13 @@ export default function App() {
           <meta property="og:image" content="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200" />
         </Helmet>
 
-        <Routes>
-          <Route path="/" element={<PortfolioHome />} />
-          <Route path="/kajja" element={<AdminPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={<div className="min-h-screen bg-slate-900 flex items-center justify-center text-white text-sm font-semibold">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<PortfolioHome />} />
+            <Route path="/kajja" element={<AdminPage />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </div>
     </>
   );
